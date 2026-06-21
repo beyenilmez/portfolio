@@ -1,0 +1,41 @@
+/* =============================================================================
+   AnimatedText -- word-fade and letter-stagger animation styles.
+
+   Keyframes defined locally so CSS Modules name scoping matches.
+   ============================================================================= */
+
+@keyframes wordFade {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Word fade: each word fades in with slight upward translate */
+.word {
+  display: inline-block;
+  margin-right: 0.28em;
+  opacity: 0;
+  animation: wordFade 0.5s both;
+}
+
+/* Letter stagger: each character fades in individually */
+.letter {
+  display: inline-block;
+  white-space: pre;
+  opacity: 0;
+  animation: wordFade 0.55s cubic-bezier(0.2, 0.7, 0.3, 1) both;
+}
+
+/* Reduced motion: show immediately, no animation */
+@media (prefers-reduced-motion: reduce) {
+  .word,
+  .letter {
+    animation: none;
+    opacity: 1;
+  }
+}

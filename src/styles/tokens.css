@@ -1,0 +1,128 @@
+/* =============================================================================
+   Design Tokens — CSS Custom Properties
+
+   All color, typography, and selection tokens live here.
+   Consumed by all CSS Modules via var(--color-*).
+   Background layer variables (--bg-*) are set on <body> at runtime by App.tsx.
+   ============================================================================= */
+
+/* --------------------------------------------------------------------------
+   Light theme palette
+   -------------------------------------------------------------------------- */
+:root[data-theme='light'] {
+  --color-bg: #f6f1e7;
+  --color-fg: #0f0d0a;
+  --color-mute: #5a5348;
+  --color-line: #d9d1bf;
+  --color-card: #fbf7ee;
+  --color-accent: #8a5a2b;
+  --color-chip: #ebe4d3;
+  --color-chip-active: #0f0d0a;
+  --color-chip-active-fg: #f6f1e7;
+
+  --selection-bg: #8a5a2b;
+  --selection-fg: #fbf7ee;
+}
+
+/* --------------------------------------------------------------------------
+   Dark theme palette
+   -------------------------------------------------------------------------- */
+:root[data-theme='dark'] {
+  --color-bg: #0e0c0a;
+  --color-fg: #f5ecdc;
+  --color-mute: #b8ad9b;
+  --color-line: #332e26;
+  --color-card: #1f1b16;
+  --color-accent: #e0b684;
+  --color-chip: #2a2520;
+  --color-chip-active: #f5ecdc;
+  --color-chip-active-fg: #0e0c0a;
+
+  --selection-bg: #e0b684;
+  --selection-fg: #0e0c0a;
+}
+
+/* --------------------------------------------------------------------------
+   Typography tokens — theme-agnostic font stacks
+   Fraunces: display/headings | Inter: body prose | JetBrains Mono: code/labels
+   -------------------------------------------------------------------------- */
+:root {
+  --font-display: 'Fraunces Variable', serif;
+  --font-body: 'Inter Variable', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono Variable', monospace;
+
+  /*
+   * Fraunces Variable has an optical-size (opsz) axis that auto-adjusts
+   * at display sizes, making it look different from the static Google Fonts
+   * version used in the design reference. Pin opsz to 9 (text mode) to match
+   * the static font's visual weight and letterform proportions.
+   */
+  font-optical-sizing: auto;
+}
+
+/* Pin Fraunces optical size to match static font rendering from reference */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+[class*='heading'],
+[class*='title'],
+[class*='school'],
+[class*='company'],
+[class*='year'],
+[class*='gpa'],
+[class*='logo'] {
+  font-optical-sizing: none;
+  font-variation-settings: 'opsz' 9;
+}
+
+/* --------------------------------------------------------------------------
+   Page gutter — single source of truth for left/right section padding.
+   Consumers use `padding-inline: var(--page-gutter)` (Header) or
+   shorthand `padding: T var(--page-gutter) B` (sections). No per-component
+   media queries for L/R values — the token cascades.
+   -------------------------------------------------------------------------- */
+:root {
+  --page-gutter: 48px;
+}
+
+@media (max-width: 1023px) {
+  :root {
+    --page-gutter: 32px;
+  }
+}
+
+@media (max-width: 640px) {
+  :root {
+    --page-gutter: 20px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Reveal animation tokens — consolidated from section components.
+   Single source of truth so future tweaks (duration, easing, distance)
+   happen in one place.
+   -------------------------------------------------------------------------- */
+:root {
+  --reveal-distance: 28px;
+  --reveal-duration: 0.8s;
+  --reveal-easing: cubic-bezier(0.2, 0.7, 0.3, 1);
+  --reveal-transition:
+    opacity var(--reveal-duration) var(--reveal-easing),
+    transform var(--reveal-duration) var(--reveal-easing);
+}
+
+/* --------------------------------------------------------------------------
+   Section padding tokens — shared across Education, Experience, and Projects.
+   Contact has bespoke values and stays literal.
+   -------------------------------------------------------------------------- */
+:root {
+  --section-pad-top-d: 72px;
+  --section-pad-bottom-d: 84px;
+  --section-pad-top-t: 56px;
+  --section-pad-bottom-t: 68px;
+  --section-pad-top-m: 40px;
+  --section-pad-bottom-m: 52px;
+}

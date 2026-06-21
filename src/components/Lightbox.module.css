@@ -1,0 +1,188 @@
+/* =============================================================================
+   Lightbox -- editorial style overrides for yet-another-react-lightbox (yarl 3.x)
+   Dark backdrop with blur, JetBrains Mono counter, Fraunces title,
+   brass accent on active thumbnail, project title in top bar.
+   ============================================================================= */
+
+/* ---------------------------------------------------------------------------
+   Title bar — anchored to .yarl__container via render.controls slot
+   (NOT the per-slide render slot — that one rides the carousel transform).
+   Flex row with padding 18px 28px, space-between: eyebrow+title on left,
+   counter plus close button on right.
+   --------------------------------------------------------------------------- */
+.titleBar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 18px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #f4ede1;
+  z-index: 3; /* above carousel; under .yarl__toolbar (z 4) so close button stays clickable */
+  pointer-events: none; /* default: ignore clicks on bar background */
+}
+
+/* Re-enable pointer-events on the interactive children (counter is aria-hidden
+   and unclickable; this is defensive in case future children need clicks). */
+.titleBar > * {
+  pointer-events: auto;
+}
+
+.titleBarLeft {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.titleBarRight {
+  display: flex;
+  align-items: center;
+  gap: 18px; /* gap between counter and close */
+  /* Reserve horizontal space for the yarl toolbar's close button (which sits
+     in .yarl__toolbar at top: 0; right: 0 -- see :global(.yarl__toolbar) rule
+     below). Without this reservation the counter would visually overlap the
+     close. 36px button + 28px right gutter + 18px gap = 82px reserved. */
+  margin-right: 64px; /* close button (36) + gap (18) + small breathing buffer (10) */
+}
+
+/* PROJECT mono eyebrow */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  opacity: 0.6;
+  letter-spacing: 1.5px;
+  color: #f4ede1;
+  line-height: 1;
+}
+
+/* Fraunces 22px / weight 500 / NOT italic / ls -0.5 */
+.title {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 500;
+  font-style: normal; /* explicitly normal -- overrides any UA <h3> default */
+  letter-spacing: -0.5px;
+  margin: 4px 0 0; /* tight spacing under eyebrow */
+  color: #f4ede1;
+  line-height: 1.2;
+}
+
+/* ---------------------------------------------------------------------------
+   Backdrop -- yarl exposes color via custom property
+   --------------------------------------------------------------------------- */
+.lightbox {
+  --yarl__color_backdrop: rgba(8, 6, 4, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+/* ---------------------------------------------------------------------------
+   Counter — two <span>s so brass accent on current digit.
+   --------------------------------------------------------------------------- */
+.counter {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+}
+.counterCurrent {
+  color: var(--color-accent); /* brass accent */
+}
+.counterTotal {
+  opacity: 0.5;
+  color: rgba(245, 236, 220, 0.9); /* off-white before opacity multiplier */
+}
+
+/* ---------------------------------------------------------------------------
+   Slide image — box-shadow on the active slide.
+   --------------------------------------------------------------------------- */
+.lightbox :global(.yarl__slide_image) {
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  border-radius: 3px;
+  object-fit: contain;
+}
+
+/* ---------------------------------------------------------------------------
+   Buttons — round 36px close, 44px nav arrows, flex centering.
+   --------------------------------------------------------------------------- */
+.lightbox :global(.yarl__button) {
+  width: 36px;
+  height: 36px;
+  padding: 0; /* zeroes yarl default 8px padding */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.06);
+  color: #f4ede1;
+  filter: none; /* preserved -- kills yarl default drop-shadow filter */
+}
+.lightbox :global(.yarl__button:hover) {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+}
+/* Nav arrows are slightly larger than close (44px) */
+.lightbox :global(.yarl__navigation_prev),
+.lightbox :global(.yarl__navigation_next) {
+  width: 44px;
+  height: 44px;
+}
+
+/* Icon size override — yarl default 32px overflows our 36/44px buttons.
+   Close button gets 16px; navigation arrows get 18px. */
+.lightbox :global(.yarl__toolbar) :global(.yarl__icon) {
+  width: 16px;
+  height: 16px;
+}
+.lightbox :global(.yarl__navigation_prev) :global(.yarl__icon),
+.lightbox :global(.yarl__navigation_next) :global(.yarl__icon) {
+  width: 18px;
+  height: 18px;
+}
+
+/* ---------------------------------------------------------------------------
+   Thumbnail strip — brass accent border on active thumbnail.
+   --------------------------------------------------------------------------- */
+.lightbox :global(.yarl__thumbnails_thumbnail) {
+  border: 2px solid transparent;
+  transition: border-color 0.2s ease;
+}
+.lightbox :global(.yarl__thumbnails_thumbnail_active) {
+  border-color: var(--color-accent, #8a5a2b);
+}
+
+/* ---------------------------------------------------------------------------
+   Toolbar — close button container at viewport top-right.
+   yarl default: position: absolute; top: 0; right: 0; padding: 8px.
+   Match .titleBar's exact 18px top padding so the close button's vertical
+   center aligns with the counter and title row.
+   --------------------------------------------------------------------------- */
+.lightbox :global(.yarl__toolbar) {
+  padding: 18px 28px; /* matches .titleBar exactly so close center == counter center */
+  z-index: 4; /* above .titleBar (z 3) so close button receives clicks */
+}
+
+/* ---------------------------------------------------------------------------
+   Hide the Zoom plugin's +/- buttons on every platform. Keep the plugin so
+   wheel, pinch, double-tap, and keyboard zoom still work — only suppress
+   the visual buttons that would overlap the counter. Yarl's Zoom plugin
+   renders these as IconButtons with stable English aria-labels.
+   --------------------------------------------------------------------------- */
+.lightbox :global(.yarl__toolbar) :global(button[aria-label='Zoom in']),
+.lightbox :global(.yarl__toolbar) :global(button[aria-label='Zoom out']) {
+  display: none;
+}
+
+/* ---------------------------------------------------------------------------
+   Navigation arrows — 20px gutters from viewport edges.
+   yarl default is flush with viewport edge (left: 0 / right: 0). Override
+   the horizontal anchor; preserve top: 50% + translateY(-50%) from defaults.
+   --------------------------------------------------------------------------- */
+.lightbox :global(.yarl__navigation_prev) {
+  left: 20px;
+}
+.lightbox :global(.yarl__navigation_next) {
+  right: 20px;
+}

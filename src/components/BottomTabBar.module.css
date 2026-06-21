@@ -1,0 +1,64 @@
+/* =============================================================================
+   BottomTabBar -- mobile-only fixed bottom navigation
+   Hidden on tablet/desktop, pill-shaped bar on mobile (<=640px)
+   ============================================================================= */
+
+.tabBar {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .tabBar {
+    display: flex;
+    position: fixed;
+    left: 12px;
+    right: 12px;
+    bottom: 14px;
+    z-index: 30;
+    background: var(--color-card);
+    border: 1px solid var(--color-line);
+    border-radius: 999px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 8px 6px;
+    justify-content: space-around;
+    align-items: center;
+  }
+}
+
+.tab {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.3px;
+  color: var(--color-mute);
+  background: transparent;
+  border: none;
+  padding: 7px 10px;
+  border-radius: 999px;
+  cursor: pointer;
+  text-decoration: none;
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+
+.tab:hover {
+  color: var(--color-fg);
+}
+
+.tabActive {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.3px;
+  background: var(--color-fg);
+  color: var(--color-bg);
+  border: none;
+  padding: 7px 10px;
+  border-radius: 999px;
+  cursor: pointer;
+  text-decoration: none;
+  transition:
+    background 0.2s,
+    color 0.2s;
+}

@@ -1,0 +1,16 @@
+# Build artifacts
+dist
+dist-server
+.lighthouse-tmp
+node_modules
+
+# Lock files (Prettier should not touch)
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+
+# Generated / committed-as-binary
+public/*.png
+public/*.ico
+public/*.svg
+scripts/og-fonts/*.ttf

@@ -1,0 +1,13 @@
+.section {
+  /* Default empty — consumer-supplied className applies the layout (padding, max-width, border-top). */
+}
+
+.kickerRow {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5em;
+}
+
+.kicker {
+  /* Fallback only — consumers pass their own styles.kicker via kickerClassName. */
+}

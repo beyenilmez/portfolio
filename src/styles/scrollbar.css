@@ -1,0 +1,60 @@
+/* =============================================================================
+   Scrollbar
+   Debossed cream channel with a raised tobacco thumb.
+   Firefox: scrollbar-width/color give a matching thin fallback.
+   WebKit: pseudo-elements build the full groove illusion.
+   ============================================================================= */
+
+/* Firefox scrollbar */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #8a5a2b #00000008;
+}
+
+/* Webkit scrollbar */
+html::-webkit-scrollbar {
+  width: 12px;
+}
+
+html::-webkit-scrollbar-track {
+  background:
+    linear-gradient(to right, #00000014 0 1px, transparent 1px 11px, #ffffffaa 11px 12px), #00000008;
+  border-radius: 6px;
+}
+
+html::-webkit-scrollbar-thumb {
+  background: linear-gradient(to right, #b07e4c, #8a5a2b 50%, #6d4520);
+  border-radius: 6px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  box-shadow: 0 1px 0 #ffffff55 inset;
+}
+
+html::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to right, #c89764, #9a6a36 50%, #7d5528);
+  background-clip: padding-box;
+  border: 2px solid transparent;
+}
+
+/* Dark theme scrollbar */
+html[data-theme='dark'] {
+  scrollbar-color: #c8a27a #ffffff08;
+}
+
+html[data-theme='dark']::-webkit-scrollbar-track {
+  background:
+    linear-gradient(to right, #ffffff10 0 1px, transparent 1px 11px, #00000055 11px 12px), #ffffff08;
+}
+
+html[data-theme='dark']::-webkit-scrollbar-thumb {
+  background: linear-gradient(to right, #d9b88c, #c8a27a 50%, #9a7a52);
+  background-clip: padding-box;
+  border: 2px solid transparent;
+  box-shadow: 0 1px 0 #00000055 inset;
+}
+
+html[data-theme='dark']::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to right, #e8cba3, #d6b087 50%, #a8865a);
+  background-clip: padding-box;
+  border: 2px solid transparent;
+}

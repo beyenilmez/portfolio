@@ -1,0 +1,303 @@
+/* =============================================================================
+   Header — sticky navigation bar
+
+   Responsive breakpoints:
+   - Desktop (>=1024): full nav + all social icons
+   - Tablet (641-1023): full nav + email icon only
+   - Mobile (<=640): no nav, lang + theme toggles only
+   ============================================================================= */
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  backdrop-filter: blur(22px) saturate(200%);
+  -webkit-backdrop-filter: blur(22px) saturate(200%);
+  padding: 18px var(--page-gutter);
+}
+
+:global(html[data-theme='light']) .header {
+  background: rgba(255, 255, 255, 0.48);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+:global(html[data-theme='dark']) .header {
+  background: rgba(0, 0, 0, 0.42);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* --------------------------------------------------------------------------
+   Container
+   -------------------------------------------------------------------------- */
+
+.container {
+  max-width: 1240px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+/* --------------------------------------------------------------------------
+   Logo
+   -------------------------------------------------------------------------- */
+
+.logo {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.3px;
+  color: var(--color-fg);
+  text-decoration: none;
+}
+
+.dot {
+  color: var(--color-accent);
+}
+
+/* --------------------------------------------------------------------------
+   Navigation
+   -------------------------------------------------------------------------- */
+
+.nav {
+  display: flex;
+  gap: 28px;
+  align-items: center;
+}
+
+.navLink {
+  position: relative;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--color-mute);
+  text-decoration: none;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.navLink::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 1px;
+  background: var(--color-accent);
+  pointer-events: none;
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 0.5s cubic-bezier(0.78, 0.02, 0.22, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navLink::after {
+    transition: none;
+  }
+}
+[data-reduced-motion='true'] .navLink::after {
+  transition: none;
+}
+
+.navLink:hover::after {
+  clip-path: inset(0 0 0 0);
+}
+
+.navLink:hover {
+  color: var(--color-fg);
+}
+
+.navIndex {
+  color: var(--color-accent);
+  margin-right: 6px;
+}
+
+/* --------------------------------------------------------------------------
+   Controls
+   -------------------------------------------------------------------------- */
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.iconLink {
+  width: 32px;
+  height: 32px;
+  border-radius: 16px;
+  border: 1px solid var(--color-line);
+  background: transparent;
+  color: var(--color-fg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    transform 0.2s;
+}
+
+.iconLink:hover {
+  background: var(--color-chip);
+  border-color: var(--color-fg);
+  transform: translateY(-1px);
+}
+
+.separator {
+  width: 1px;
+  height: 18px;
+  background: var(--color-line);
+  margin: 0 6px;
+}
+
+.langPill {
+  display: flex;
+  background: var(--color-chip);
+  border-radius: 20px;
+  padding: 3px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+
+.langBtn {
+  border: none;
+  padding: 5px 10px;
+  border-radius: 18px;
+  cursor: pointer;
+  background: transparent;
+  color: var(--color-mute);
+  font-family: inherit;
+  font-size: inherit;
+  letter-spacing: 0.5px;
+  transition:
+    background 0.25s,
+    color 0.25s;
+}
+
+.langBtnActive {
+  border: none;
+  padding: 5px 10px;
+  border-radius: 18px;
+  cursor: pointer;
+  background: var(--color-chip-active);
+  color: var(--color-chip-active-fg);
+  font-family: inherit;
+  font-size: inherit;
+  letter-spacing: 0.5px;
+  transition:
+    background 0.25s,
+    color 0.25s;
+}
+
+.themeBtn {
+  width: 32px;
+  height: 32px;
+  border-radius: 16px;
+  border: 1px solid var(--color-line);
+  background: transparent;
+  color: var(--color-fg);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: background 0.2s;
+}
+
+/* Both icons always in DOM (hydration-stable). CSS shows the correct one
+   based on the data-theme attribute set by the blocking script pre-paint. */
+.sunIcon {
+  display: flex;
+}
+
+.moonIcon {
+  display: none;
+}
+
+:global(html[data-theme='light']) .sunIcon {
+  display: none;
+}
+
+:global(html[data-theme='light']) .moonIcon {
+  display: flex;
+}
+
+.themeBtn:hover {
+  background: var(--color-chip);
+}
+
+/* --------------------------------------------------------------------------
+   Social icon groups (responsive visibility)
+   -------------------------------------------------------------------------- */
+
+.socialDesktop {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.socialTablet {
+  display: none;
+}
+
+/* --------------------------------------------------------------------------
+   Tablet (641px - 1023px)
+   -------------------------------------------------------------------------- */
+
+@media (min-width: 641px) and (max-width: 1023px) {
+  .navLink {
+    font-size: 12px;
+  }
+
+  .nav {
+    gap: 18px;
+  }
+
+  .socialDesktop {
+    display: none;
+  }
+
+  .socialTablet {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Mobile (<=640px)
+   -------------------------------------------------------------------------- */
+
+@media (max-width: 640px) {
+  .header {
+    padding: 14px var(--page-gutter);
+  }
+
+  .nav {
+    display: none;
+  }
+
+  .controls {
+    gap: 6px;
+  }
+
+  .socialDesktop {
+    display: none;
+  }
+
+  .socialTablet {
+    display: none;
+  }
+
+  .separator {
+    display: none;
+  }
+
+  .logo {
+    font-size: 17px;
+  }
+}

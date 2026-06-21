@@ -1,0 +1,116 @@
+/* =============================================================================
+   Animation Keyframes — global declarations
+
+   All @keyframes live here; components reference by name in their CSS Modules.
+   ============================================================================= */
+
+/* Word fade — used for language switch and scroll-reveal animations */
+@keyframes wordFade {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Portrait shimmer — skeleton loading state */
+@keyframes portraitShimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Ink draw — underline trace animation on links */
+@keyframes inkDraw {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0% 0 0);
+  }
+}
+
+/* Fade in — general entrance animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Slide up — scroll reveal entrance */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(var(--reveal-distance, 28px));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Skeleton pulse — portrait loading state base layer */
+@keyframes skeletonPulse {
+  0%,
+  100% {
+    opacity: 0.06;
+  }
+  50% {
+    opacity: 0.12;
+  }
+}
+
+/* Reduced motion: make all global keyframes instant/no-op.
+   This catches inline style animations (splitWordsHero, hero desc/buttons,
+   experience entries, education text) that reference global wordFade. */
+@media (prefers-reduced-motion: reduce) {
+  @keyframes wordFade {
+    from {
+      opacity: 1;
+      transform: none;
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes fadeIn {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes slideUp {
+    from {
+      opacity: 1;
+      transform: none;
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes skeletonPulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+  }
+  @keyframes portraitShimmer {
+    0%,
+    100% {
+      transform: none;
+    }
+  }
+}

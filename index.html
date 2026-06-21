@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Favicon coverage set — same across both locales -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <title>Bedirhan Yenilmez - Software Engineer</title>
+    <!--head-outlet-->
+
+    <!-- Blocking theme init — MUST be first script, before any stylesheet.
+       Cascade: localStorage → prefers-color-scheme:dark → prefers-color-scheme:light → 'dark' fallback.
+       Sets data-theme on <html> before first paint — prevents theme flash. -->
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem('pf.theme');
+          if (t !== 'light' && t !== 'dark') {
+            if (window.matchMedia('(prefers-color-scheme: dark)').matches) t = 'dark';
+            else if (window.matchMedia('(prefers-color-scheme: light)').matches) t = 'light';
+            else t = 'dark';
+          }
+          document.documentElement.setAttribute('data-theme', t);
+        } catch (e) {
+          // localStorage unavailable
+          // Fallback to <html data-theme="dark"> static default
+        }
+      })();
+    </script>
+
+    <!-- Critical inline CSS — paints first-frame canvas in the active theme.
+       Must come AFTER the data-theme-setting <script> above and BEFORE the
+       external stylesheet so it applies during the parse-to-CSS-arrival window.
+
+       Hex values mirror src/styles/tokens.css:13 (#f6f1e7 light) and
+       tokens.css:31 (#0e0c0a dark) — keep in sync if tokens change.
+
+       - color-scheme: PRIMARY fix — controls UA canvas color BEFORE any
+         background-color rule applies; also tells the browser to use the
+         dark UA defaults for scrollbars + form controls.
+       - html { background } : SECONDARY fix — paints the dark surface even
+         on Safari <=12 where color-scheme is unsupported.
+       - body { background: transparent } : ensures the external CSS
+         body { background-color: var(--color-bg) } produces no visible
+         repaint — html literal hex shines through, then body paints same
+         color, no flicker either direction. -->
+    <style>
+      html {
+        color-scheme: dark light;
+        background: #0e0c0a;
+      }
+      html[data-theme='light'] {
+        color-scheme: light;
+        background: #f6f1e7;
+      }
+      html[data-theme='dark'] {
+        color-scheme: dark;
+        background: #0e0c0a;
+      }
+      body {
+        background-color: transparent;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Ambient background layers — fixed positioned, pointer-events: none.
+       CSS rules in src/styles/global.css; intensity vars set by App.tsx on mount. -->
+    <div class="bg-layer warm" aria-hidden="true"></div>
+    <div class="bg-layer grain" aria-hidden="true"></div>
+    <div class="bg-layer press" aria-hidden="true"></div>
+
+    <div id="root"><!--ssr-outlet--></div>
+    <script type="module" src="/src/entry-client.tsx"></script>
+  </body>
+</html>

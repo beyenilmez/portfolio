@@ -1,0 +1,179 @@
+/* =============================================================================
+   Global CSS — body defaults, selection, background layers
+
+   Import order in entry-client.tsx:
+     1. tokens.css  (tokens)
+     2. global.css  (this file)
+     3. scrollbar.css
+     4. animations.css
+   ============================================================================= */
+
+/* --------------------------------------------------------------------------
+   Box sizing reset
+   -------------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Body defaults
+   -------------------------------------------------------------------------- */
+body {
+  position: relative;
+  background-color: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Background layer CSS variables — values set by App.tsx on mount */
+  --bg-warm: 0.35;
+  --bg-grain: 0.12;
+  --bg-grain-sz: 60px;
+  --bg-press: 0.07;
+}
+
+/* --------------------------------------------------------------------------
+   Text selection — themed via CSS custom properties
+   -------------------------------------------------------------------------- */
+::selection {
+  background-color: var(--selection-bg);
+  color: var(--selection-fg);
+}
+
+/* --------------------------------------------------------------------------
+   Background ambient layers
+   Three fixed-position layers stacked behind all content (z-index: 1).
+   pointer-events: none ensures they never intercept clicks.
+
+   Layer 1: Warm radial wash (multiply/screen blend)
+   Layer 2: Paper grain — SVG fractal noise, tiled
+   Layer 3: Letterpress horizontal grooves
+
+   Source: Portfolio.html background layer CSS (verbatim, adapted for [data-theme])
+   -------------------------------------------------------------------------- */
+.bg-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Warm radial wash — light.
+   position:absolute so the glow scrolls with the page (not pinned to viewport). */
+.bg-layer.warm {
+  position: absolute;
+  background:
+    radial-gradient(120% 80% at 15% 0%, #d9a966 0%, transparent 55%),
+    radial-gradient(100% 70% at 95% 100%, #6b3f1a 0%, transparent 60%);
+  mix-blend-mode: multiply;
+  opacity: var(--bg-warm);
+}
+
+/* Warm radial wash — dark */
+html[data-theme='dark'] .bg-layer.warm {
+  background:
+    radial-gradient(120% 80% at 15% 0%, #8a5a2b 0%, transparent 55%),
+    radial-gradient(100% 70% at 95% 100%, #e0b684 0%, transparent 60%);
+  mix-blend-mode: screen;
+  opacity: calc(var(--bg-warm) * 0.7);
+}
+
+/* Paper grain — light: fractalNoise, dark tones */
+.bg-layer.grain {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.1  0 0 0 0 0.08  0 0 0 0 0.05  0 0 0 1 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  background-size: var(--bg-grain-sz) var(--bg-grain-sz);
+  mix-blend-mode: multiply;
+  opacity: var(--bg-grain);
+}
+
+/* Paper grain — dark: light tones for screen blend */
+html[data-theme='dark'] .bg-layer.grain {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 0.92  0 0 0 0 0.82  0 0 0 1 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  mix-blend-mode: screen;
+  opacity: calc(var(--bg-grain) * 0.55);
+}
+
+/* Letterpress horizontal grooves — light */
+.bg-layer.press {
+  background-image: repeating-linear-gradient(to bottom, transparent 0 3px, #00000020 3px 4px);
+  mix-blend-mode: multiply;
+  opacity: var(--bg-press);
+}
+
+/* Letterpress horizontal grooves — dark */
+html[data-theme='dark'] .bg-layer.press {
+  background-image: repeating-linear-gradient(to bottom, transparent 0 3px, #ffffff18 3px 4px);
+  mix-blend-mode: screen;
+  opacity: calc(var(--bg-press) * 0.9);
+}
+
+/* Skip-to-content link — visually hidden until focused */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 0;
+  z-index: 9999;
+  padding: 0.5rem 1rem;
+  background: var(--color-bg);
+  color: var(--color-fg);
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  text-decoration: none;
+  border: 2px solid var(--color-accent);
+  border-radius: 4px;
+}
+
+.skip-link:focus {
+  top: 1rem;
+  left: 1rem;
+}
+
+/* --------------------------------------------------------------------------
+   Ambient cursor glow — follows mouse via --cx/--cy CSS vars (useCursorGlow)
+   -------------------------------------------------------------------------- */
+.ambientGlow {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(
+    600px circle at calc(var(--cx, 0.5) * 100vw) calc(var(--cy, 0.3) * 100vh),
+    rgba(138, 90, 43, calc(0.08 * var(--glow-opacity, 0))),
+    transparent 65%
+  );
+  transition: background 0.2s ease-out;
+}
+
+[data-theme='dark'] .ambientGlow {
+  background: radial-gradient(
+    720px circle at calc(var(--cx, 0.5) * 100vw) calc(var(--cy, 0.3) * 100vh),
+    rgba(224, 182, 132, calc(0.176 * var(--glow-opacity, 0))),
+    transparent 65%
+  );
+}
+
+@media (pointer: coarse) {
+  .ambientGlow {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ambientGlow {
+    display: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Mobile bottom padding — clears the fixed BottomTabBar (96px total clearance)
+   -------------------------------------------------------------------------- */
+@media (max-width: 640px) {
+  #main-content {
+    padding-bottom: 96px;
+  }
+}

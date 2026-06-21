@@ -1,0 +1,205 @@
+.section {
+  padding: var(--section-pad-top-d) var(--page-gutter) var(--section-pad-bottom-d);
+  border-top: 1px solid var(--color-line);
+}
+
+.container {
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.kicker {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--color-mute);
+  display: block;
+  margin: 0 0 24px; /* tighter rhythm — no subhead between kicker and entries */
+}
+
+.kickerDot {
+  color: var(--color-accent);
+  margin: 0 4px;
+}
+
+.heading {
+  font-family: var(--font-display);
+  font-size: 44px;
+  font-weight: 400;
+  line-height: normal;
+  color: var(--color-fg);
+  letter-spacing: -1px;
+  margin-top: 14px;
+  margin-bottom: 40px;
+}
+
+.entry {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 44px;
+  align-items: start;
+}
+
+.mainCol {
+  display: flex;
+  flex-direction: column;
+  padding-top: 2px;
+  min-width: 0;
+}
+
+.schoolRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 4px;
+}
+
+.logo {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.school {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 500;
+  line-height: normal;
+  color: var(--color-fg);
+  letter-spacing: -0.5px;
+}
+
+.degree {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: normal;
+  font-style: italic;
+  color: var(--color-mute);
+  display: block;
+  margin-bottom: 6px;
+}
+
+.dateRange {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--color-mute);
+  letter-spacing: 0.5px;
+  display: block;
+  margin-bottom: 2px;
+}
+
+.dateOngoing {
+  color: var(--color-accent);
+}
+
+.where {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--color-mute);
+  letter-spacing: 0.3px;
+  display: block;
+}
+
+.mobileYear {
+  display: none;
+}
+
+.mobileOngoing {
+  color: var(--color-accent);
+}
+
+.gpaCol {
+  text-align: right;
+  padding-top: 4px;
+  flex-shrink: 0;
+}
+
+.gpaLabel {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  color: var(--color-mute);
+  margin-bottom: 4px;
+}
+
+.gpaNumber {
+  font-family: var(--font-display);
+  font-size: 44px;
+  font-weight: 500;
+  letter-spacing: -1.5px;
+  line-height: 1;
+  color: var(--color-fg);
+  display: block;
+}
+
+.gpaScale {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--color-mute);
+  display: block;
+  margin-top: 4px;
+}
+
+/* Tablet */
+@media (min-width: 641px) and (max-width: 1023px) {
+  .section {
+    padding: var(--section-pad-top-t) var(--page-gutter) var(--section-pad-bottom-t);
+  }
+  .heading {
+    font-size: 38px;
+  }
+  .school {
+    font-size: 22px;
+  }
+  .degree {
+    font-size: 16px;
+  }
+  .gpaNumber {
+    font-size: 38px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .section {
+    padding: var(--section-pad-top-m) var(--page-gutter) var(--section-pad-bottom-m);
+  }
+  .heading {
+    font-size: 32px;
+    margin-bottom: 28px;
+  }
+  .entry {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px 24px;
+    justify-content: space-between;
+  }
+  .mainCol {
+    flex: 1 1 220px;
+  }
+  .mobileYear {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--color-mute);
+    letter-spacing: 1px;
+    margin-top: 10px;
+  }
+  .logo {
+    width: 36px;
+    height: 36px;
+  }
+  .school {
+    font-size: 22px;
+  }
+  .degree {
+    font-size: 16px;
+  }
+  .gpaNumber {
+    font-size: 38px;
+  }
+}
