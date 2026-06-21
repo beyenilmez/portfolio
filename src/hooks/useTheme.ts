@@ -92,7 +92,7 @@ export function useTheme(): UseThemeResult {
       }
       ::view-transition-old(root) { animation: none; }
       ::view-transition-new(root) {
-        animation: ${animId} .62s cubic-bezier(.77,0,.18,1);
+        animation: ${animId} .38s cubic-bezier(.4,0,.2,1);
       }
     `;
     document.head.appendChild(style);
