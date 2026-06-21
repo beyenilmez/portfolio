@@ -113,6 +113,11 @@ html[data-theme='dark'] .bg-layer.press {
   opacity: calc(var(--bg-press) * 0.9);
 }
 
+/* Keep section kickers visible below sticky header on anchor scroll */
+section[id] {
+  scroll-margin-top: 54px;
+}
+
 /* Skip-to-content link — visually hidden until focused */
 .skip-link {
   position: absolute;
