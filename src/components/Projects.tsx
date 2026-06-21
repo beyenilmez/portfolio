@@ -60,7 +60,7 @@ function ProjectCard({
             src={firstImg}
             alt={project.title[locale]}
             sizes="(max-width: 640px) 100vw, (max-width: 1023px) 50vw, 600px"
-            loading="lazy"
+            loading="eager"
             decoding="async"
             className={styles.cardImage}
             style={{ cursor: 'zoom-in' }}
