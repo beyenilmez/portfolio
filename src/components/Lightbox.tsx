@@ -69,6 +69,7 @@ export default function Lightbox({ data, onClose }: LightboxProps) {
     <YarlLightbox
       open={!!data}
       close={onClose}
+      controller={{ closeOnBackdropClick: true }}
       index={data.index}
       slides={data.slides}
       plugins={[Thumbnails, Zoom]}
