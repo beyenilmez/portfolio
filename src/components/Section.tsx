@@ -68,9 +68,9 @@ export default function Section({
 }: SectionProps) {
   const { ref: revealRef, shown } = useScrollReveal(revealKey);
   const kicker = (
-    <span className={kickerClassName ?? styles.kicker}>
+    <h2 className={kickerClassName ?? styles.kicker}>
       {index} · {label}
-    </span>
+    </h2>
   );
   return (
     <section

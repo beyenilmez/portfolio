@@ -74,7 +74,7 @@ function ProjectCard({
         </div>
 
         <div className={styles.cardContent}>
-          <h3 className={styles.cardTitle}>{project.title[locale]}</h3>
+          <span className={styles.cardTitle}>{project.title[locale]}</span>
           <div className={styles.cardTags}>
             {project.tags.map((tag) => (
               <span key={tag} className={styles.tag}>
@@ -269,10 +269,10 @@ export default function Projects() {
         </div>
       ) : (
         <div className={styles.empty}>
-          <h3>
+          <h2>
             {emptyRest}
             <em className={styles.emptyAccent}>{emptyAccent}</em>.
-          </h3>
+          </h2>
           <p>{content.i18n.labels.emptyBody[locale]}</p>
           <button className={styles.clearBtn} onClick={() => setActiveTag('All')}>
             {content.i18n.labels.clearFilter[locale]}

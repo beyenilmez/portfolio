@@ -29,9 +29,9 @@ export default function Contact() {
     >
       <div className={styles.grid}>
         <div>
-          <h2 className={styles.heading} key={'ch-' + locale}>
+          <h3 className={styles.heading} key={'ch-' + locale}>
             <AnimatedText text={heading} animKey={locale} />.
-          </h2>
+          </h3>
           <a href={`mailto:${content.links.email}`} className={styles.emailPill}>
             <svg
               className={styles.emailIcon}

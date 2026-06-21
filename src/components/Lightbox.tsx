@@ -50,7 +50,7 @@ function TitleBar({ title, eyebrow = 'PROJECT' }: { title: string; eyebrow?: str
     <div className={styles.titleBar}>
       <div className={styles.titleBarLeft}>
         <div className={styles.eyebrow}>{eyebrow}</div>
-        <h3 className={styles.title}>{title}</h3>
+        <div className={styles.title}>{title}</div>
       </div>
       <div className={styles.titleBarRight}>
         <div className={styles.counter} aria-hidden="true">
