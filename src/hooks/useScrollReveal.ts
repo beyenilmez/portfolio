@@ -39,6 +39,9 @@ export function useScrollReveal(retriggerKey?: string | number): {
     }
     first.current = false;
 
+    // On mobile, tall sections need earlier trigger — use 0 threshold and
+    // positive bottom margin so they animate in before scrolling past.
+    const isMobile = typeof window !== 'undefined' && window.innerWidth <= 640;
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
@@ -49,8 +52,8 @@ export function useScrollReveal(retriggerKey?: string | number): {
         });
       },
       {
-        threshold: features.motion.revealThreshold,
-        rootMargin: features.motion.revealRootMargin,
+        threshold: isMobile ? 0 : features.motion.revealThreshold,
+        rootMargin: isMobile ? '0px 0px 120px 0px' : features.motion.revealRootMargin,
       },
     );
     io.observe(node);
