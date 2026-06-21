@@ -174,8 +174,8 @@ export const content = {
     email: 'yenilmezbedirhan@gmail.com',
     github: 'https://github.com/beyenilmez',
     linkedin: 'https://www.linkedin.com/in/bedirhan-yenilmez',
-    cvEn: 'https://beyenilmez.github.io/cv/en/bedirhan_yenilmez_cv.pdf',
-    cvTr: 'https://beyenilmez.github.io/cv/tr/bedirhan_yenilmez_cv.pdf',
+    cvEn: 'https://cv.bedirhanyenilmez.com/en/bedirhan_yenilmez_cv.pdf',
+    cvTr: 'https://cv.bedirhanyenilmez.com/tr/bedirhan_yenilmez_cv.pdf',
   },
 
   i18n: {
