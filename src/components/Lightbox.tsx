@@ -81,14 +81,14 @@ export default function Lightbox({ data, onClose }: LightboxProps) {
         imageFit: 'cover',
       }}
       zoom={{
-        maxZoomPixelRatio: 1.8,
+        maxZoomPixelRatio: 5,
         scrollToZoom: true,
-        wheelZoomDistanceFactor: 100,
-        pinchZoomDistanceFactor: 100,
+        wheelZoomDistanceFactor: 80,
+        pinchZoomDistanceFactor: 60,
         doubleTapDelay: 300,
-        doubleClickDelay: 300,
-        doubleClickMaxStops: 2,
-        keyboardMoveDistance: 50,
+        doubleClickDelay: 250,
+        doubleClickMaxStops: 3,
+        keyboardMoveDistance: 100,
       }}
       carousel={{
         finite: false,
