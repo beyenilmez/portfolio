@@ -1,11 +1,32 @@
 /**
  * Education section — university logo, degree, GPA, year.
  */
-import { useLocale } from '@/contexts/LocaleContext';
+import { useLocale, type Locale } from '@/contexts/LocaleContext';
 import { content } from '@/config/content';
 import Section from '@/components/Section';
+import { useScrollReveal } from '@/hooks/useScrollReveal';
+import { useCountUp } from '@/hooks/useCountUp';
 import deuLogo from '@/assets/deu.webp?w=88&format=webp';
 import styles from './Education.module.css';
+
+function GpaCounter({ gpa, gpaMax, locale }: { gpa: string; gpaMax: string; locale: Locale }) {
+  const { ref, shown } = useScrollReveal(locale);
+  const decimals = gpa.includes('.') ? (gpa.split('.')[1]?.length ?? 0) : 0;
+  const animated = useCountUp(parseFloat(gpa), shown);
+  const parts = animated.toFixed(decimals).split('.');
+
+  return (
+    <div className={styles.gpaCol}>
+      <div className={styles.gpaLabel}>{content.i18n.labels.gpaLabel[locale]}</div>
+      <span ref={ref} className={styles.gpaNumber}>
+        <span className={styles.gpaInt}>{parts[0]}</span>
+        <span className={styles.gpaDot}>.</span>
+        <span className={styles.gpaFrac}>{parts[1]}</span>
+      </span>
+      <span className={styles.gpaScale}>/ {gpaMax}</span>
+    </div>
+  );
+}
 
 export default function Education() {
   const locale = useLocale();
@@ -68,12 +89,8 @@ export default function Education() {
             </span>
           </div>
 
-          {/* GPA column */}
-          <div className={styles.gpaCol}>
-            <div className={styles.gpaLabel}>{content.i18n.labels.gpaLabel[locale]}</div>
-            <span className={styles.gpaNumber}>{entry.gpa}</span>
-            <span className={styles.gpaScale}>/ {entry.gpaMax}</span>
-          </div>
+          {/* GPA counter */}
+          <GpaCounter gpa={entry.gpa} gpaMax={entry.gpaMax} locale={locale} />
         </div>
       ))}
     </Section>

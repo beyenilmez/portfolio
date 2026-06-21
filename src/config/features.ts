@@ -27,6 +27,8 @@ interface MotionConfig {
   letterStagger: boolean;
   /** Enable 3D tilt + glare on project cards */
   cardTilt: boolean;
+  /** Animate GPA counter on scroll reveal */
+  counterAnimation: boolean;
 }
 
 export interface FeatureFlags {
@@ -65,6 +67,7 @@ export const features = {
     wordFadeLang: true,
     letterStagger: true,
     cardTilt: true,
+    counterAnimation: true,
   },
   flags: {
     reducedMotion: 'auto' as const,

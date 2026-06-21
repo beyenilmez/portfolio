@@ -133,7 +133,22 @@
   letter-spacing: -1.5px;
   line-height: 1;
   color: var(--color-fg);
-  display: block;
+  display: inline-flex;
+  transform: translateX(0.1em);
+}
+
+.gpaInt {
+  width: 0.65em;
+  text-align: right;
+}
+
+.gpaDot {
+  /* stationary — locked between two equal-width boxes */
+}
+
+.gpaFrac {
+  width: 0.65em;
+  text-align: left;
 }
 
 .gpaScale {
