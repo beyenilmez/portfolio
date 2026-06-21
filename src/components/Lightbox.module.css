@@ -22,6 +22,7 @@
   color: #f4ede1;
   z-index: 3; /* above carousel; under .yarl__toolbar (z 4) so close button stays clickable */
   pointer-events: none; /* default: ignore clicks on bar background */
+  background: linear-gradient(rgba(8, 6, 4, 0.8) 0%, rgba(8, 6, 4, 0.3) 60%, transparent 100%);
 }
 
 /* Re-enable pointer-events on the interactive children (counter is aria-hidden
@@ -149,8 +150,24 @@
   border: 2px solid transparent;
   transition: border-color 0.2s ease;
 }
+.lightbox :global(.yarl__thumbnails_container) {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent 0%, rgba(8, 6, 4, 0.3) 40%, rgba(8, 6, 4, 0.8) 100%);
+  padding: 28px 20px 14px;
+  z-index: 2;
+}
+.lightbox :global(.yarl__thumbnails_thumbnail) {
+  border: 2px solid transparent;
+  transition: border-color 0.2s ease;
+}
 .lightbox :global(.yarl__thumbnails_thumbnail_active) {
   border-color: var(--color-accent, #8a5a2b);
+}
+.lightbox :global(.yarl__thumbnails_bottom) :global(.yarl__thumbnails_vignette) {
+  background: none;
 }
 
 /* ---------------------------------------------------------------------------
