@@ -6,6 +6,9 @@
   "license": "AGPL-3.0",
   "type": "module",
   "packageManager": "pnpm@9.14.2",
+  "engines": {
+    "node": "^24.15.0"
+  },
   "scripts": {
     "dev": "vite",
     "build": "pnpm build:client && pnpm build:server && pnpm prerender && pnpm og-image",
