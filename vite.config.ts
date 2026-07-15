@@ -3,9 +3,11 @@ import react from '@vitejs/plugin-react';
 import { imagetools } from 'vite-imagetools';
 import path from 'path';
 
+import { cloudflare } from "@cloudflare/vite-plugin";
+
 export default defineConfig({
   base: '/',
-  plugins: [react(), imagetools()],
+  plugins: [react(), imagetools(), cloudflare()],
   // Lightning CSS minifier corrupts rgba() values in :global() selectors
   build: { cssMinify: false },
   resolve: {
