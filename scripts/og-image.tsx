@@ -89,20 +89,29 @@ function ogCard(locale: Locale, content: SiteContent) {
         position: 'relative',
       }}
     >
-      {/* Eyebrow — JBM, opacity 0.6, letter-spacing 1.5 */}
-      <div
-        style={{
-          fontFamily: 'JetBrains Mono',
-          fontSize: 18,
-          letterSpacing: 1.5,
-          color: '#f5ecdc', // ink-on-dark
-          opacity: 0.6,
-        }}
-      >
-        {eyebrow}
+      {/* Top row: eyebrow left, brass dot right */}
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+        <div
+          style={{
+            fontFamily: 'JetBrains Mono',
+            fontSize: 30,
+            letterSpacing: 1.5,
+            color: '#f5ecdc',
+            opacity: 0.6,
+          }}
+        >
+          {eyebrow}
+        </div>
+        <div
+          style={{
+            width: 12,
+            height: 12,
+            background: '#e0b684', // brass accent
+          }}
+        />
       </div>
 
-      {/* Name two-line stack + brass accent rule */}
+      {/* Name two-line stack + brass accent rule + role */}
       <div style={{ display: 'flex', flexDirection: 'column' }}>
         <div style={{ fontSize: 96, lineHeight: 1.05, color: '#f5ecdc', display: 'flex' }}>
           {first}
@@ -112,12 +121,22 @@ function ogCard(locale: Locale, content: SiteContent) {
         </div>
         <div
           style={{
-            width: 80,
+            width: 120,
             height: 2,
             background: '#e0b684', // brass accent
             marginTop: 24,
           }}
         />
+        <div
+          style={{
+            fontFamily: 'JetBrains Mono',
+            fontSize: 26,
+            color: '#d4c9b5', // between ink-on-dark and mute-on-dark
+            marginTop: 16,
+          }}
+        >
+          {content.i18n.hero.roleMobile[locale]}
+        </div>
       </div>
 
       {/* URL bottom-right — JBM, mute-on-dark */}
@@ -126,7 +145,7 @@ function ogCard(locale: Locale, content: SiteContent) {
           display: 'flex',
           justifyContent: 'flex-end',
           fontFamily: 'JetBrains Mono',
-          fontSize: 14,
+          fontSize: 20,
           color: '#b8ad9b', // mute-on-dark
         }}
       >
