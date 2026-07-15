@@ -201,7 +201,7 @@ export interface SiteContent {
 
 export const content = {
   links: {
-    email: 'yenilmezbedirhan@gmail.com',
+    email: 'contact@bedirhanyenilmez.com',
     github: 'https://github.com/beyenilmez',
     linkedin: 'https://www.linkedin.com/in/bedirhan-yenilmez',
     cvEn: 'https://cv.bedirhanyenilmez.com/en/bedirhan_yenilmez_cv.pdf',
