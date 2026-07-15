@@ -107,6 +107,8 @@ interface I18nLabels {
     heroTitle: BilingualString;
     /** Hero description paragraph */
     heroDesc: BilingualString;
+    /** Short description for SEO meta + OG/Twitter cards (≤160 chars) */
+    ogDesc: BilingualString;
   };
   /** Navigation section labels */
   nav: {
@@ -196,6 +198,10 @@ export const content = {
       heroDesc: {
         en: "I'm a software engineer dedicated to building side projects and exploring open-source. The practical experience I gain from creating things from scratch simply drives my curiosity and forms the foundation of the software I build.",
         tr: 'Yan projeler geli\u015Ftirmeye ve a\u00E7\u0131k kaynak d\u00FCnyas\u0131n\u0131 ke\u015Ffetmeye odaklanan bir yaz\u0131l\u0131m m\u00FChendisiyim. S\u0131f\u0131rdan bir \u015Feyler in\u015Fa ederken kazand\u0131\u011F\u0131m pratik tecr\u00FCbe hem merak\u0131m\u0131 canl\u0131 tutuyor hem de geli\u015Ftirdi\u011Fim yaz\u0131l\u0131mlar\u0131n temelini olu\u015Fturuyor.',
+      },
+      ogDesc: {
+        en: 'Software engineer dedicated to side projects & open-source. Hands-on experience forms the foundation of my work.',
+        tr: 'S\u00FCrekli yeni yan projeler geli\u015Ftiren, a\u00E7\u0131k kayna\u011Fa merakl\u0131 bir yaz\u0131l\u0131m m\u00FChendisiyim. Deneyerek ve \u00FCreterek \u00F6\u011Freniyorum.',
       },
     },
     nav: {
