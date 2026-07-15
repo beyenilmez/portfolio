@@ -123,6 +123,14 @@ async function main() {
   fs.writeFileSync(path.join(distDir, 'robots.txt'), robots);
   console.log('  Written: dist/robots.txt');
 
+  // 7. Generate llms.txt (per locale)
+  const llms = generateLlmsTxt(baseUrl, content);
+  fs.writeFileSync(path.join(distDir, 'llms.txt'), llms.en);
+  console.log('  Written: dist/llms.txt');
+  fs.mkdirSync(path.join(distDir, 'tr'), { recursive: true });
+  fs.writeFileSync(path.join(distDir, 'tr', 'llms.txt'), llms.tr);
+  console.log('  Written: dist/tr/llms.txt');
+
   console.log('Prerender complete.');
 }
 
@@ -233,6 +241,193 @@ Allow: /
 
 Sitemap: ${baseUrl}/sitemap.xml
 `;
+}
+
+// --- LLMs.txt ---
+
+function generateLlmsTxt(
+  baseUrl: string,
+  content: {
+    links: { email: string; github: string; linkedin: string; cvEn: string; cvTr: string };
+    i18n: {
+      hero: {
+        name: string;
+        role: { en: string; tr: string };
+        roleMobile: { en: string; tr: string };
+        heroDesc: { en: string; tr: string };
+        llmsBio?: { en: string; tr: string };
+      };
+    };
+    projects: Array<{
+      title: { en: string; tr: string };
+      year: string;
+      tags: string[];
+      aiTags?: string[];
+      blurb: { en: string; tr: string };
+      aiDesc?: { en: string; tr: string };
+      github?: string;
+      website?: string;
+    }>;
+    experience: Array<{
+      company: string;
+      role: { en: string; tr: string };
+      start: string;
+      end: string;
+      location: { en: string; tr: string };
+      tags: string[];
+      aiTags?: string[];
+      bullets: Array<{ en: string; tr: string }>;
+      aiDesc?: { en: string; tr: string };
+    }>;
+    education: Array<{
+      school: { en: string; tr: string };
+      degree: { en: string; tr: string };
+      where: { en: string; tr: string };
+      start: string;
+      end: string;
+      gpa: string;
+      gpaMax: string;
+      ongoing: boolean;
+      aiDesc?: { en: string; tr: string };
+    }>;
+    certifications: Array<{
+      title: { en: string; tr: string };
+      issuer: { en: string; tr: string };
+      date: { en: string; tr: string };
+      url?: string;
+      aiDesc: { en: string; tr: string };
+    }>;
+  },
+): { en: string; tr: string } {
+  const result: Record<string, string[]> = { en: [], tr: [] };
+
+  for (const locale of ['en', 'tr'] as const) {
+    const lines = result[locale];
+
+    const isEn = locale === 'en';
+    const tagsLabel = isEn ? 'Tags' : 'Etiketler';
+    const url = isEn ? baseUrl + '/' : baseUrl + '/tr/';
+
+    lines.push(`# ${content.i18n.hero.name} — ${content.i18n.hero.roleMobile[locale]}`);
+    lines.push('');
+    lines.push('> ' + (content.i18n.hero.llmsBio?.[locale] ?? content.i18n.hero.heroDesc[locale]));
+    lines.push('');
+    lines.push(isEn
+      ? 'This file provides a structured summary of my background, intended for LLMs and AI agents.'
+      : 'Bu dosya, LLM\'ler ve yapay zeka modelleri için hazırlanmış, geçmişimin yapılandırılmış bir özetini sunar.');
+    lines.push('');
+    lines.push(isEn
+      ? 'Türkçe sürüm: https://bedirhanyenilmez.com/tr/llms.txt'
+      : 'English version: https://bedirhanyenilmez.com/llms.txt');
+    lines.push('');
+
+    // --- Skills (all tags + aiTags from projects and experience) ---
+    const allSkills = new Set<string>();
+    for (const p of content.projects) {
+      for (const t of p.tags) allSkills.add(t);
+      if (p.aiTags) for (const t of p.aiTags) allSkills.add(t);
+    }
+    for (const exp of content.experience) {
+      for (const t of exp.tags) allSkills.add(t);
+      if (exp.aiTags) for (const t of exp.aiTags) allSkills.add(t);
+    }
+    const sortedSkills = [...allSkills].sort((a, b) => a.localeCompare(b));
+    lines.push(`## ${isEn ? 'Skills' : 'Yetenekler'} — ${content.i18n.hero.name}`);
+    lines.push('');
+    lines.push(sortedSkills.join(', '));
+    lines.push('');
+
+    // --- Education ---
+    lines.push(`## ${isEn ? 'Education' : 'Eğitim'} — ${content.i18n.hero.name}`);
+    lines.push('');
+    for (const edu of content.education) {
+      const school = edu.school[locale];
+      const degree = edu.degree[locale];
+      const where = edu.where[locale];
+      const end = edu.ongoing
+        ? (isEn ? '(ongoing)' : '(devam ediyor)')
+        : edu.end;
+      const aiDesc = edu.aiDesc?.[locale];
+      lines.push(`- **${degree}**, ${school}, ${where} (${edu.start} – ${end}) — GPA ${edu.gpa}/${edu.gpaMax}`);
+      if (aiDesc) {
+        lines.push(`  ${aiDesc}`);
+      }
+      lines.push('');
+    }
+
+    // --- Experience ---
+    lines.push(`## ${isEn ? 'Experience' : 'Deneyim'} — ${content.i18n.hero.name}`);
+    lines.push('');
+    for (const exp of content.experience) {
+      const role = exp.role[locale];
+      const start = exp.start.slice(0, 7);
+      const end = exp.end ? exp.end.slice(0, 7) : (isEn ? 'Present' : 'Devam');
+      const loc = exp.location[locale];
+      const allExpTags = exp.aiTags ? [...exp.tags, ...exp.aiTags] : exp.tags;
+      const expTags = allExpTags.map((t) => `\`${t}\``).join(', ');
+      const aiDesc = exp.aiDesc?.[locale];
+      lines.push(`- **${role}** — ${exp.company}, ${loc} (${start} – ${end})`);
+      lines.push(`  ${tagsLabel}: ${expTags}`);
+      if (aiDesc) {
+        lines.push(`  ${aiDesc}`);
+      } else {
+        lines.push(''); // blank line before nested bullets
+        for (const b of exp.bullets) {
+          lines.push(`  - ${b[locale]}`);
+        }
+      }
+      lines.push(''); // end of entry
+    }
+
+    // --- Certifications ---
+    lines.push(`## ${isEn ? 'Certifications' : 'Sertifikalar'} — ${content.i18n.hero.name}`);
+    lines.push('');
+    for (const cert of content.certifications) {
+      const title = cert.title[locale];
+      const issuer = cert.issuer[locale];
+      const desc = cert.aiDesc[locale];
+      lines.push(`- **${title}** — ${issuer} (${cert.date[locale]})`);
+      lines.push(`  ${desc}`);
+      if (cert.url) {
+        lines.push(`  [${isEn ? 'Verify' : 'Doğrula'}](${cert.url})`);
+      }
+      lines.push('');
+    }
+
+    // --- Projects ---
+    lines.push(`## ${isEn ? 'Projects' : 'Projeler'} — ${content.i18n.hero.name}`);
+    lines.push('');
+    for (const p of content.projects) {
+      const title = p.title[locale];
+      const desc = p.aiDesc?.[locale] ?? p.blurb[locale];
+      const allProjTags = p.aiTags ? [...p.tags, ...p.aiTags] : p.tags;
+      const tags = allProjTags.map((t) => `\`${t}\``).join(', ');
+      const links: string[] = [];
+      if (p.github) links.push(`[GitHub](${p.github})`);
+      if (p.website) links.push(`[Website](${p.website})`);
+      lines.push(`- **${title}** (${p.year})`);
+      lines.push(`  ${tagsLabel}: ${tags}`);
+      lines.push(`  ${desc}`);
+      if (links.length) {
+        lines.push(`  ${links.join(' · ')}`);
+      }
+      lines.push(''); // end of entry
+    }
+
+    // --- Links ---
+    lines.push(`## ${isEn ? 'Links' : 'Bağlantılar'} — ${content.i18n.hero.name}`);
+    lines.push('');
+    lines.push(`- [${isEn ? 'Portfolio' : 'Portfolyo'}](${url})`);
+    const emailLabel = isEn ? 'Email' : 'E-posta';
+    lines.push(`- [${emailLabel}](mailto:${content.links.email})`);
+    lines.push(`- [GitHub](${content.links.github})`);
+    lines.push(`- [LinkedIn](${content.links.linkedin})`);
+    lines.push(`- [CV (EN)](${content.links.cvEn})`);
+    lines.push(`- [CV (TR)](${content.links.cvTr})`);
+
+  }
+
+  return { en: result['en'].join('\n') + '\n', tr: result['tr'].join('\n') + '\n' };
 }
 
 // --- Run ---
