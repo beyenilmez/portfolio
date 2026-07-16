@@ -197,6 +197,10 @@ function buildHeadTags(
     <meta property="og:title" content="${escapeAttr(title)}" />
     <meta property="og:description" content="${escapeAttr(description)}" />
     <meta property="og:image" content="${imageUrl}" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="${escapeAttr(title)}" />
+    <meta name="theme-color" content="#0e0c0a" />
     <meta property="og:locale" content="${isEn ? 'en_US' : 'tr_TR'}" />
     <meta property="og:locale:alternate" content="${isEn ? 'tr_TR' : 'en_US'}" />
     <meta property="og:site_name" content="${escapeAttr(name)}" />
