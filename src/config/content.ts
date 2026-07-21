@@ -212,28 +212,28 @@ export const content = {
     hero: {
       name: 'Bedirhan Yenilmez',
       role: {
-        en: 'software engineer',
-        tr: 'yazılım mühendisiyim',
+        en: 'computer engineer',
+        tr: 'bilgisayar mühendisiyim',
       },
       roleMobile: {
-        en: 'Software Engineer',
-        tr: 'Yazılım Mühendisi',
+        en: 'Computer Engineer',
+        tr: 'Bilgisayar Mühendisi',
       },
       heroTitle: {
         en: 'Hello, I am Bedirhan Yenilmez. I am a {role}.',
         tr: 'Merhaba, ben Bedirhan Yenilmez. Ben bir {role}.',
       },
       heroDesc: {
-        en: "I'm a software engineer dedicated to building side projects and exploring open-source. The practical experience I gain from creating things from scratch simply drives my curiosity and forms the foundation of the software I build.",
-        tr: 'Yan projeler geli\u015Ftirmeye ve a\u00E7\u0131k kaynak d\u00FCnyas\u0131n\u0131 ke\u015Ffetmeye odaklanan bir yaz\u0131l\u0131m m\u00FChendisiyim. S\u0131f\u0131rdan bir \u015Feyler in\u015Fa ederken kazand\u0131\u011F\u0131m pratik tecr\u00FCbe hem merak\u0131m\u0131 canl\u0131 tutuyor hem de geli\u015Ftirdi\u011Fim yaz\u0131l\u0131mlar\u0131n temelini olu\u015Fturuyor.',
+        en: "I'm a computer engineer dedicated to building side projects and exploring open-source. The practical experience I gain from creating things from scratch simply drives my curiosity and forms the foundation of the software I build.",
+        tr: 'Yan projeler geli\u015Ftirmeye ve a\u00E7\u0131k kaynak d\u00FCnyas\u0131n\u0131 ke\u015Ffetmeye odaklanan bir bilgisayar m\u00FChendisiyim. S\u0131f\u0131rdan bir \u015Feyler in\u015Fa ederken kazand\u0131\u011F\u0131m pratik tecr\u00FCbe hem merak\u0131m\u0131 canl\u0131 tutuyor hem de geli\u015Ftirdi\u011Fim yaz\u0131l\u0131mlar\u0131n temelini olu\u015Fturuyor.',
       },
       ogDesc: {
-        en: 'Software engineer dedicated to side projects & open-source. Hands-on experience forms the foundation of my work.',
-        tr: 'S\u00FCrekli yeni yan projeler geli\u015Ftiren, a\u00E7\u0131k kayna\u011Fa merakl\u0131 bir yaz\u0131l\u0131m m\u00FChendisiyim. Deneyerek ve \u00FCreterek \u00F6\u011Freniyorum.',
+        en: 'Computer engineer dedicated to side projects & open-source. Hands-on experience forms the foundation of my work.',
+        tr: 'S\u00FCrekli yeni yan projeler geli\u015Ftiren, a\u00E7\u0131k kayna\u011Fa merakl\u0131 bir bilgisayar m\u00FChendisiyim. Deneyerek ve \u00FCreterek \u00F6\u011Freniyorum.',
       },
       llmsBio: {
-        en: 'Recent B.Sc. graduate in Computer Engineering (June 2026) and early-career software engineer with a passion for independent development and open-source projects. I work across the full stack -- from desktop and web apps to game server tools and AI/ML systems -- applying self-directed learnings, practical skills, and technical insights, aiming to deliver high-impact results in my professional career. Bilingual in English and Turkish, based in Turkey. Outside of work, I manage a homelab and contribute to open-source software and personal projects.',
-        tr: 'Bilgisayar M\u00FChendisli\u011Fi\u2019nden yeni mezun (Haziran 2026) ve kariyerimin ba\u015F\u0131ndaki bir yaz\u0131l\u0131m m\u00FChendisiyim. A\u00E7\u0131k kaynak projelere ve ba\u011F\u0131ms\u0131z geli\u015Ftirmeye ilgi duyuyorum. Masa\u00FCst\u00FC ve web uygulamalar\u0131ndan oyun sunucu ara\u00E7lar\u0131na ve yapay zeka sistemlerine kadar geni\u015F bir yelpazede \u00E7al\u0131\u015F\u0131yorum; kendi kendime \u00F6\u011Frendiklerimi profesyonel kariyerimde somut sonu\u00E7lara d\u00F6n\u00FC\u015Ft\u00FCrmeyi hedefliyorum. \u0130ngilizce ve T\u00FCrk\u00E7e konuşabiliyorum, T\u00FCrkiye\u2019de ya\u015F\u0131yorum. Bo\u015F zamanlar\u0131mda ev sunucusu (homelab) y\u00F6netiyorum, a\u00E7\u0131k kaynakl\u0131 yaz\u0131l\u0131mlara ve ki\u015Fisel projelerime katk\u0131da bulunuyorum.',
+        en: 'Recent B.Sc. graduate in Computer Engineering (June 2026) with a passion for independent development and open-source projects. I work across the full stack -- from desktop and web apps to game server tools and AI/ML systems -- applying self-directed learnings, practical skills, and technical insights, aiming to deliver high-impact results in my professional career. Bilingual in English and Turkish, based in Turkey. Outside of work, I manage a homelab and contribute to open-source software and personal projects.',
+        tr: 'Bilgisayar M\u00FChendisli\u011Fi\u2019nden yeni mezunum (Haziran 2026). A\u00E7\u0131k kaynak projelere ve ba\u011F\u0131ms\u0131z geli\u015Ftirmeye ilgi duyuyorum. Masa\u00FCst\u00FC ve web uygulamalar\u0131ndan oyun sunucu ara\u00E7lar\u0131na ve yapay zeka sistemlerine kadar geni\u015F bir yelpazede \u00E7al\u0131\u015F\u0131yorum; kendi kendime \u00F6\u011Frendiklerimi profesyonel kariyerimde somut sonu\u00E7lara d\u00F6n\u00FC\u015Ft\u00FCrmeyi hedefliyorum. \u0130ngilizce ve T\u00FCrk\u00E7e konuşabiliyorum, T\u00FCrkiye\u2019de ya\u015F\u0131yorum. Bo\u015F zamanlar\u0131mda ev sunucusu (homelab) y\u00F6netiyorum, a\u00E7\u0131k kaynakl\u0131 yaz\u0131l\u0131mlara ve ki\u015Fisel projelerime katk\u0131da bulunuyorum.',
       },
     },
     nav: {
