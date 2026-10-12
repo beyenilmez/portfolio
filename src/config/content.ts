@@ -16,6 +16,13 @@ import pzAdminShot1 from '@/assets/projects/pz-admin/01.webp?w=400;600;1000&form
 import pzAdminShot2 from '@/assets/projects/pz-admin/02.webp?w=400;600;1000&format=webp;jpg&as=picture';
 import pzAdminShot3 from '@/assets/projects/pz-admin/03.webp?w=400;600;1000&format=webp;jpg&as=picture';
 import pzAdminShot4 from '@/assets/projects/pz-admin/04.webp?w=400;600;1000&format=webp;jpg&as=picture';
+import pzAdminShot5 from '@/assets/projects/pz-admin/05.webp?w=400;600;1000&format=webp;jpg&as=picture';
+import pzAdminShot6 from '@/assets/projects/pz-admin/06.webp?w=400;600;1000&format=webp;jpg&as=picture';
+import pzAdminShot7 from '@/assets/projects/pz-admin/07.webp?w=400;600;1000&format=webp;jpg&as=picture';
+import pzAdminShot8 from '@/assets/projects/pz-admin/08.webp?w=400;600;1000&format=webp;jpg&as=picture';
+import pzAdminShot9 from '@/assets/projects/pz-admin/09.webp?w=400;600;1000&format=webp;jpg&as=picture';
+import pzAdminShot10 from '@/assets/projects/pz-admin/10.webp?w=400;600;1000&format=webp;jpg&as=picture';
+import pzAdminShot11 from '@/assets/projects/pz-admin/11.webp?w=400;600;1000&format=webp;jpg&as=picture';
 import iconiumShot1 from '@/assets/projects/iconium/01.webp?w=400;600;1000&format=webp;jpg&as=picture';
 import iconiumShot2 from '@/assets/projects/iconium/02.webp?w=400;600;1000&format=webp;jpg&as=picture';
 import gradefulShot1 from '@/assets/projects/gradeful/01.webp?w=400;600;1000&format=webp;jpg&as=picture';
@@ -323,21 +330,33 @@ export const content = {
       id: 'pz-admin',
       title: { en: 'PZ Admin', tr: 'PZ Admin' },
       year: '2024',
-      tags: ['Go', 'React', 'Desktop', 'TailwindCSS'],
-      aiTags: ['Wails', 'TypeScript', 'RCON', 'github-actions'],
+      tags: ['Go', 'React', 'Desktop', 'Mantine'],
+      aiTags: ['Wails v3', 'TypeScript', 'RCON', 'i18next', 'github-actions'],
       weight: 11,
       showcased: true,
       github: 'https://github.com/beyenilmez/pz-admin',
       website: 'https://beyenilmez.github.io/pz-admin',
       blurb: {
-        en: 'Cross-platform desktop admin for Project Zomboid servers over RCON. Go backend, React frontend, shipped for Windows, Linux, macOS.',
-        tr: "RCON destekli, çapraz platform Project Zomboid sunucu yönetim aracı. Backend'de Go, frontend'de React kullanıldı. Windows, Linux ve macOS'ta çalışıyor.",
+        en: 'Cross-platform desktop admin for Project Zomboid servers over RCON. Go backend, React frontend, available for Windows, Linux and macOS.',
+        tr: 'RCON destekli, çapraz platform Project Zomboid sunucu yönetim aracı. Go backend ve React frontend ile Windows, Linux ve macOS üzerinde çalışıyor.',
       },
       aiDesc: {
-        en: 'A cross-platform desktop administration tool for Project Zomboid game servers, built with Wails v2 (Go Framework for cross-platform desktop application development) and React (TypeScript). Communicates entirely over the RCON protocol via the gorcon/rcon library. The Go backend maintains a single RCON TCP connection with a background goroutine that periodically polls server state. RCON commands are dispatched through a reusable abstraction with template-based construction, response validation, and player state synchronization. The config system uses Go reflection for dynamic field access with JSON persistence and automatic default merging. The server options editor uses hash-based change detection to diff modified fields and apply only changed options. Saved RCON credentials are encrypted before storage. A self-update mechanism queries GitHub Releases and performs binary patching. The React frontend features a tabbed dashboard with a validated connection form, server management, player management, a full RCON terminal with autocomplete, a categorized server options editor with search and import/export, and standalone tools. The player table supports sorting, filtering, and batch operations. Features multiple color schemes for both light/dark themes and Windows backdrop effects. Internationalization uses i18next and supports four languages (Turkish/English/Russian/Ukrainian). GitHub Actions CI produces native installers for Windows and Linux. Application state persists as JSON files. App supports configurable logging and log rotation.',
-        tr: 'Project Zomboid oyun sunucuları için Wails v2 (cross-platform masaüstü uygulama geliştirme amaçlı Go Framework\'ü) ve React (TypeScript) ile geliştirilmiş, cross-platform bir masaüstü yönetim aracı. gorcon/rcon kütüphanesi aracılığıyla tamamen RCON protokolü üzerinden iletişim kurar. Go backend\'i, sunucu durumunu periyodik olarak sorgulayan (poll) bir arka plan *goroutine*\'i ile tek bir RCON TCP bağlantısını sürdürür. RCON komutları; şablon tabanlı oluşturma, yanıt doğrulama ve oyuncu durumu senkronizasyonu barındıran, yeniden kullanılabilir bir soyutlama üzerinden iletilir. Config sistemi, JSON persistence ve otomatik default merging özellikleriyle birlikte, dinamik alan erişimi için Go *reflection*\'ı kullanır. Sunucu ayarları editörü, değiştirilmiş alanların farkını almak ve yalnızca değişen ayarları uygulamak için *hash* tabanlı değişiklik algılama kullanır. Kaydedilen RCON kimlik bilgileri depolanmadan önce şifrelenir. Kendi kendini güncelleme (self-update) mekanizması, GitHub Releases\'i sorgular ve *binary patching* gerçekleştirir. React frontend\'i; sunucu bağlantı formu, sunucu yönetimi, oyuncu yönetimi, otomatik tamamlama özellikli kapsamlı bir RCON terminali, arama ve import/export özelliklerine sahip kategorize edilmiş bir sunucu ayarları editörü ve bağımsız araçlar içeren sekmeli bir *dashboard* sunar. Oyuncu tablosu; sıralama, filtreleme ve *batch* (toplu) işlemleri destekler. Açık/koyu tema, çoklu renk şemaları, ve Windows *backdrop* efektleri için destek sunar. Uluslararasılaştırma (internationalization), dört dili (Türkçe/İngilizce/Rusça/Ukraynaca) destekler ve i18next kullanır. GitHub Actions CI, Windows ve Linux için *native* yükleyiciler üretir. Uygulama durumu JSON dosyaları olarak tutulur. Uygulama, yapılandırılabilir loglama ve log rotasyonu seçenekleri sunar.',
+        en: 'A cross-platform desktop administration tool for Project Zomboid servers, built with Go, Wails v3, React, TypeScript and Mantine. Connects over RCON and saves server profiles with passwords stored in the OS keyring. Supports player management and batch actions, item and vehicle catalogs for Builds 41 and 42, server options editing, a console with autocomplete, weather controls and server events. Includes a rich text editor for in-game messages. The item browser, vehicle browser and message editor also work as standalone tools on the project website. Features light/dark themes and multilingual support through i18next. GitHub Actions builds Windows, Linux and macOS packages.',
+        tr: 'Go, Wails v3, React, TypeScript ve Mantine ile geliştirilmiş, Project Zomboid sunucuları için çapraz platform bir masaüstü yönetim aracı. RCON üzerinden bağlanır; sunucu profillerini kaydeder ve parolaları işletim sisteminin anahtarlığında saklar. Oyuncu yönetimi ve toplu işlemler, Build 41 ve 42 için eşya ve araç katalogları, sunucu ayarları editörü, otomatik tamamlamalı konsol, hava durumu kontrolleri ve sunucu olayları sunar. Oyun içi mesajlar için zengin metin editörü içerir. Eşya tarayıcısı, araç tarayıcısı ve mesaj editörü proje sitesinde bağımsız araçlar olarak da kullanılabilir. Açık/koyu tema ve i18next ile çoklu dil desteği sağlar. GitHub Actions ile Windows, Linux ve macOS paketleri oluşturulur.',
       },
-      images: [pzAdminShot1, pzAdminShot2, pzAdminShot3, pzAdminShot4],
+      images: [
+        pzAdminShot1,
+        pzAdminShot2,
+        pzAdminShot3,
+        pzAdminShot4,
+        pzAdminShot5,
+        pzAdminShot6,
+        pzAdminShot7,
+        pzAdminShot8,
+        pzAdminShot9,
+        pzAdminShot10,
+        pzAdminShot11,
+      ],
     },
     {
       id: 'iconium',
